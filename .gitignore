@@ -53,3 +53,7 @@ windows
 
 # node.js files
 node_modules
+
+# firebase files
+public
+.firebase
