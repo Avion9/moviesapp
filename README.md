@@ -11,7 +11,7 @@ To install the packages needed, run:
 flutter packages get
 ```
 
-then, generate the web pages with:
+Although not really necessary, you can generate the web pages with:
 ```bash
 flutter build web
 ```
