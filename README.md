@@ -19,12 +19,8 @@ flutter build web
 Firebase will be used here for the webpage, run:
 ```bash
 npm install
-# and then
-npm run init
 ```
-then configure your firebase initialization to **Hosting: Configure files for Firebase Hosting**.
-
-the public directory of the firebase configuration is on `build/web`.
+the firebase config already exists in this repository on `firebase.json`.
 
 next, run:
 ```bash
