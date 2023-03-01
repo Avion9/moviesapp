@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +24,6 @@ import 'package:moviesapp/model/search_category.dart';
 //Buttons
 
 import '../Buttons/button_custom_Desktop.dart';
-import 'Top_Rated_page.dart';
 
 final mainPageDataControllerProvider =
     StateNotifierProvider<MainPageDataController, MainPageData>(
@@ -35,8 +35,12 @@ final selectedMoviePosterURLProvider = StateProvider<String?>((ref) {
   final movies = ref.watch(mainPageDataControllerProvider).movies;
   return movies.isNotEmpty ? movies[0].posterURL() : null;
 });
+/* final selectedMovieCategoryProvider = StateProvider<String?>((ref) {
+  final Category = ref.watch(mainPageDataControllerProvider).searchCategory;
+  return movies.isNotEmpty ? movies[0].posterURL() : null;
+}); */
 
-class MainPage extends ConsumerWidget {
+class Top_Rated_Page extends ConsumerWidget {
   late double deviceHeight;
   late double deviceWidth;
 
@@ -44,8 +48,9 @@ class MainPage extends ConsumerWidget {
   late MainPageData mainPageData;
 
   late TextEditingController searchTextFieldController;
+  late String category;
 
-  MainPage({Key? key}) : super(key: key);
+  Top_Rated_Page({Key? key, required this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -158,11 +163,11 @@ class MainPage extends ConsumerWidget {
                                 ),
                               ),
                               CustomDesktopDropdownButton2(
-                                hint: '',
-                                dropdownItems: items,
-                                onChanged: (value) =>
-                                    Selecteditem(context, value.toString()),
-                              )
+                                  hint: '',
+                                  dropdownItems: items,
+                                  onChanged: (value) =>
+                                      Selecteditem(context, value.toString())),
+
                               /* CustomDesktopDropdownButton2(
                                 Selecteditem(context, 0)
                                 hint: '',
@@ -262,7 +267,6 @@ class MainPage extends ConsumerWidget {
             MaterialPageRoute(
                 builder: (context) => Top_Rated_Page(category: category)),
             (route) => true);
-
         break;
       case 'Upcoming':
         Navigator.of(context).pushAndRemoveUntil(
@@ -272,92 +276,4 @@ class MainPage extends ConsumerWidget {
       default:
     }
   }
-
-  /* Widget CategorySelection() {
-    return DropdownButton(
-      menuMaxHeight: 200,
-      dropdownColor: Colors.black,
-      borderRadius: BorderRadius.all(Radius.circular(15)),
-      iconSize: 30,
-      value: mainPageData.searchCategory,
-      icon: const Icon(
-        Icons.menu,
-        color: Colors.white24,
-      ),
-      underline: Container(
-        height: 2,
-        color: Colors.white24,
-      ),
-      onChanged: (value) => value.toString().isNotEmpty
-          ? mainPageDataController?.updateSearchCategory(value.toString())
-          : null,
-      items: [
-        DropdownMenuItem(
-          value: SearchCategory.Popular,
-          child: Text(
-            SearchCategory.Popular,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-        DropdownMenuItem(
-          value: SearchCategory.TopRated,
-          child: Text(
-            SearchCategory.TopRated,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-        DropdownMenuItem(
-          value: SearchCategory.upcoming,
-          child: Text(
-            SearchCategory.upcoming,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-        DropdownMenuItem(
-          value: SearchCategory.none,
-          child: Text(
-            SearchCategory.none,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-      ],
-    );
-  } */
-
-  /* Widget CustomMenuButton() {
-    final List<String> items = [
-      SearchCategory.Popular,
-      SearchCategory.TopRated,
-      SearchCategory.upcoming,
-    ];
-
-    return CustomMobileDropdownButton2(
-      hint: '',
-      dropdownItems: items,
-      value: mainPageData.searchCategory,
-      onChanged: (value) => value.toString().isNotEmpty
-          ? mainPageDataController?.updateSearchCategory(value.toString())
-          : null,
-    );
-  }
- */
-  /*  Widget ResponsiveMenu() {
-    final List<String> items = [
-      SearchCategory.Popular,
-      SearchCategory.TopRated,
-      SearchCategory.upcoming,
-    ];
-    final String Buttonwidth;
-
-    return CustomMobileDropdownButton2(
-      log("am 2"),
-      if()
-      hint: '',
-      dropdownItems: items,
-      value: mainPageData.searchCategory,
-      onChanged: (value) => value.toString().isNotEmpty
-          ? mainPageDataController?.updateSearchCategory(value.toString())
-          : null,
-    );
-  } */
 }

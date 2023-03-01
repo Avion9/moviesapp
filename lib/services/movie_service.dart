@@ -14,6 +14,22 @@ class MovieService {
     http = getIt.get<HTTPService>();
   }
 
+  Future<List<Movie>> getPopularMovies({int? page}) async {
+    Response? response = await http.get('/movie/popular', query: {
+      'page': page,
+    });
+    //Wenn die "statusCode" 200 ist, haben wir eine korrekte Antwort erhalten.
+    if (response?.statusCode == 200) {
+      Map data = response?.data;
+      List<Movie> movies = data['results'].map<Movie>((movieData) {
+        return Movie.fromJson(movieData);
+      }).toList();
+      return movies;
+    } else {
+      throw Exception('Couldn\'t load popular Movies.');
+    }
+  }
+
   Future<List<Movie>> getTopRatedMovies({int? page}) async {
     Response? response = await http.get('/movie/top_rated', query: {
       'page': page,
@@ -27,6 +43,22 @@ class MovieService {
       return movies;
     } else {
       throw Exception('Couldn\'t load top Rated Movies.');
+    }
+  }
+
+  Future<List<Movie>> getUpcomingMovies({int? page}) async {
+    Response? response = await http.get('/movie/upcoming', query: {
+      'page': page,
+    });
+    //Wenn die "statusCode" 200 ist, haben wir eine korrekte Antwort erhalten.
+    if (response?.statusCode == 200) {
+      Map data = response?.data;
+      List<Movie> movies = data['results'].map<Movie>((movieData) {
+        return Movie.fromJson(movieData);
+      }).toList();
+      return movies;
+    } else {
+      throw Exception('Couldn\'t load upcoming Movies.');
     }
   }
 

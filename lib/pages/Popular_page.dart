@@ -36,7 +36,7 @@ final selectedMoviePosterURLProvider = StateProvider<String?>((ref) {
   return movies.isNotEmpty ? movies[0].posterURL() : null;
 });
 
-class MainPage extends ConsumerWidget {
+class Popular_Page extends ConsumerWidget {
   late double deviceHeight;
   late double deviceWidth;
 
@@ -45,7 +45,7 @@ class MainPage extends ConsumerWidget {
 
   late TextEditingController searchTextFieldController;
 
-  MainPage({Key? key}) : super(key: key);
+  Popular_Page({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -260,9 +260,10 @@ class MainPage extends ConsumerWidget {
       case 'Top Rated':
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-                builder: (context) => Top_Rated_Page(category: category)),
+                builder: (context) => Top_Rated_Page(
+                      category: category,
+                    )),
             (route) => true);
-
         break;
       case 'Upcoming':
         Navigator.of(context).pushAndRemoveUntil(
@@ -272,92 +273,4 @@ class MainPage extends ConsumerWidget {
       default:
     }
   }
-
-  /* Widget CategorySelection() {
-    return DropdownButton(
-      menuMaxHeight: 200,
-      dropdownColor: Colors.black,
-      borderRadius: BorderRadius.all(Radius.circular(15)),
-      iconSize: 30,
-      value: mainPageData.searchCategory,
-      icon: const Icon(
-        Icons.menu,
-        color: Colors.white24,
-      ),
-      underline: Container(
-        height: 2,
-        color: Colors.white24,
-      ),
-      onChanged: (value) => value.toString().isNotEmpty
-          ? mainPageDataController?.updateSearchCategory(value.toString())
-          : null,
-      items: [
-        DropdownMenuItem(
-          value: SearchCategory.Popular,
-          child: Text(
-            SearchCategory.Popular,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-        DropdownMenuItem(
-          value: SearchCategory.TopRated,
-          child: Text(
-            SearchCategory.TopRated,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-        DropdownMenuItem(
-          value: SearchCategory.upcoming,
-          child: Text(
-            SearchCategory.upcoming,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-        DropdownMenuItem(
-          value: SearchCategory.none,
-          child: Text(
-            SearchCategory.none,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-      ],
-    );
-  } */
-
-  /* Widget CustomMenuButton() {
-    final List<String> items = [
-      SearchCategory.Popular,
-      SearchCategory.TopRated,
-      SearchCategory.upcoming,
-    ];
-
-    return CustomMobileDropdownButton2(
-      hint: '',
-      dropdownItems: items,
-      value: mainPageData.searchCategory,
-      onChanged: (value) => value.toString().isNotEmpty
-          ? mainPageDataController?.updateSearchCategory(value.toString())
-          : null,
-    );
-  }
- */
-  /*  Widget ResponsiveMenu() {
-    final List<String> items = [
-      SearchCategory.Popular,
-      SearchCategory.TopRated,
-      SearchCategory.upcoming,
-    ];
-    final String Buttonwidth;
-
-    return CustomMobileDropdownButton2(
-      log("am 2"),
-      if()
-      hint: '',
-      dropdownItems: items,
-      value: mainPageData.searchCategory,
-      onChanged: (value) => value.toString().isNotEmpty
-          ? mainPageDataController?.updateSearchCategory(value.toString())
-          : null,
-    );
-  } */
 }
