@@ -45,3 +45,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# generated files
+linux
+macos
+windows
+
+# node.js files
+node_modules
